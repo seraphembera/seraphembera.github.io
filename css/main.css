@@ -1512,7 +1512,7 @@ pre code {
 }
 .footer-inner {
   box-sizing: border-box;
-  text-align: left;
+  text-align: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -2553,7 +2553,7 @@ header.header {
   vertical-align: middle;
 }
 .links-of-author a::before {
-  background: #757740;
+  background: #63d6ff;
   display: inline-block;
   margin-right: 3px;
   transform: translateY(-2px);
