@@ -29,7 +29,7 @@
 <meta property="og:description" content="为什么使用cmake?使用cmake的原因是现在有许多的c&#x2F;c++项目都使用cmake这个工具来构建项目。我相信是一种趋势，以后会有越来越多的项目使用cmake。这是其中一个原因，另一个原因是我想学QT，但是我又不想用QT Creator，所以学习一下cmake方便以后构建QT项目。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-04-01T10:11:54.000Z">
-<meta property="article:modified_time" content="2024-04-01T10:29:18.579Z">
+<meta property="article:modified_time" content="2024-04-01T10:57:51.753Z">
 <meta property="article:author" content="seraphembera">
 <meta property="article:tag" content="stm32">
 <meta property="article:tag" content="cmake">
@@ -180,7 +180,7 @@
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
       <meta itemprop="name" content="cmake交叉编译stm32程序 | seraphembera">
-      <meta itemprop="description" content="为什么使用cmake?使用cmake的原因是现在有许多的c/c++项目都使用cmake这个工具来构建项目。我相信是一种趋势，以后会有越来越多的项目使用cmake。这是其中一个原因，另一个原因是我想学QT，但是我又不想用QT Creator，所以学习一下cmake方便以后构建QT项目。">
+      <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -196,7 +196,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2024-04-01 18:11:54 / 修改时间：18:29:18" itemprop="dateCreated datePublished" datetime="2024-04-01T18:11:54+08:00">2024-04-01</time>
+      <time title="创建时间：2024-04-01 18:11:54 / 修改时间：18:57:51" itemprop="dateCreated datePublished" datetime="2024-04-01T18:11:54+08:00">2024-04-01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -211,7 +211,6 @@
   
 </div>
 
-            <div class="post-description">为什么使用cmake?使用cmake的原因是现在有许多的c/c++项目都使用cmake这个工具来构建项目。我相信是一种趋势，以后会有越来越多的项目使用cmake。这是其中一个原因，另一个原因是我想学QT，但是我又不想用QT Creator，所以学习一下cmake方便以后构建QT项目。</div>
         </div>
       </header>
 
@@ -219,6 +218,7 @@
     
     
     <div class="post-body" itemprop="articleBody"><h1 id="为什么使用cmake"><a href="#为什么使用cmake" class="headerlink" title="为什么使用cmake?"></a>为什么使用cmake?</h1><p>使用cmake的原因是现在有许多的c&#x2F;c++项目都使用cmake这个工具来构建项目。我相信是一种趋势，以后会有越来越多的项目使用cmake。这是其中一个原因，另一个原因是我想学QT，但是我又不想用QT Creator，所以学习一下cmake方便以后构建QT项目。</p>
+<span id="more"></span>
 <h1 id="新建项目"><a href="#新建项目" class="headerlink" title="新建项目"></a>新建项目</h1><p>使用stm32cubemx来生成新项目代码。具体步骤不在这赘述，网上有许多资料。我新建了一个名称为led的项目，显然这个项目就是简单点个灯。注意Toolchain选择make。</p>
 <h1 id="创建CMakeLists-txt文件"><a href="#创建CMakeLists-txt文件" class="headerlink" title="创建CMakeLists.txt文件"></a>创建CMakeLists.txt文件</h1><pre><code>cd led
 touch CMakeLists.txt
