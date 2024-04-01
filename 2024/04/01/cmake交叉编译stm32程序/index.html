@@ -19,23 +19,29 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"seraphembera.github.io","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.19.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
-    <meta property="og:type" content="website">
-<meta property="og:title" content="seraphembera">
-<meta property="og:url" content="http://seraphembera.github.io/index.html">
+    <meta name="description" content="为什么使用cmake?使用cmake的原因是现在有许多的c&#x2F;c++项目都使用cmake这个工具来构建项目。我相信是一种趋势，以后会有越来越多的项目使用cmake。这是其中一个原因，另一个原因是我想学QT，但是我又不想用QT Creator，所以学习一下cmake方便以后构建QT项目。 新建项目使用stm32cubemx来生成新项目代码。具体步骤不在这赘述，网上有许多资料。我新建了一个名称">
+<meta property="og:type" content="article">
+<meta property="og:title" content="cmake交叉编译stm32程序">
+<meta property="og:url" content="http://seraphembera.github.io/2024/04/01/cmake%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91stm32%E7%A8%8B%E5%BA%8F/index.html">
 <meta property="og:site_name" content="seraphembera">
+<meta property="og:description" content="为什么使用cmake?使用cmake的原因是现在有许多的c&#x2F;c++项目都使用cmake这个工具来构建项目。我相信是一种趋势，以后会有越来越多的项目使用cmake。这是其中一个原因，另一个原因是我想学QT，但是我又不想用QT Creator，所以学习一下cmake方便以后构建QT项目。 新建项目使用stm32cubemx来生成新项目代码。具体步骤不在这赘述，网上有许多资料。我新建了一个名称">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-04-01T10:11:54.000Z">
+<meta property="article:modified_time" content="2024-04-01T10:13:38.354Z">
 <meta property="article:author" content="seraphembera">
+<meta property="article:tag" content="stm32">
+<meta property="article:tag" content="cmake">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://seraphembera.github.io/">
+<link rel="canonical" href="http://seraphembera.github.io/2024/04/01/cmake%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91stm32%E7%A8%8B%E5%BA%8F/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":true,"isPost":false,"lang":"zh-CN","comments":"","permalink":"","path":"index.html","title":""}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://seraphembera.github.io/2024/04/01/cmake%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91stm32%E7%A8%8B%E5%BA%8F/","path":"2024/04/01/cmake交叉编译stm32程序/","title":"cmake交叉编译stm32程序"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>seraphembera</title>
+<title>cmake交叉编译stm32程序 | seraphembera</title>
   
 
 
@@ -68,7 +74,7 @@
 
     <a href="/" class="brand" rel="start">
       <i class="logo-line"></i>
-      <h1 class="site-title">seraphembera</h1>
+      <p class="site-title">seraphembera</p>
       <i class="logo-line"></i>
     </a>
   </div>
@@ -94,7 +100,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -107,6 +113,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BD%BF%E7%94%A8cmake"><span class="nav-number">1.</span> <span class="nav-text">为什么使用cmake?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%B0%E5%BB%BA%E9%A1%B9%E7%9B%AE"><span class="nav-number">2.</span> <span class="nav-text">新建项目</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%9B%E5%BB%BACMakeLists-txt%E6%96%87%E4%BB%B6"><span class="nav-number">3.</span> <span class="nav-text">创建CMakeLists.txt文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BC%96%E5%86%99CMakeLists-txt"><span class="nav-number">4.</span> <span class="nav-text">编写CMakeLists.txt</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%96%E5%86%99%E7%BC%96%E8%AF%91%E5%B7%A5%E5%85%B7%E9%93%BE%E6%96%87%E4%BB%B6"><span class="nav-number">4.1.</span> <span class="nav-text">编写编译工具链文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%96%E5%86%99CMakeLists-txt-1"><span class="nav-number">4.2.</span> <span class="nav-text">编写CMakeLists.txt</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BC%96%E8%AF%91%E9%A1%B9%E7%9B%AE"><span class="nav-number">5.</span> <span class="nav-text">编译项目</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#cmake-G-Ninja"><span class="nav-number">5.1.</span> <span class="nav-text">cmake -G Ninja ..</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ninja"><span class="nav-number">5.2.</span> <span class="nav-text">ninja</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%83%A7%E5%BD%95%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6"><span class="nav-number">6.</span> <span class="nav-text">烧录可执行文件</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -146,16 +153,17 @@
 
     </div>
 
-    <div class="main-inner index posts-expand">
+    <div class="main-inner post posts-expand">
 
-    
+
+  
 
 
 <div class="post-block">
   
   
 
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://seraphembera.github.io/2024/04/01/cmake%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91stm32%E7%A8%8B%E5%BA%8F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -169,13 +177,13 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | seraphembera">
+      <meta itemprop="name" content="cmake交叉编译stm32程序 | seraphembera">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/04/01/cmake%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91stm32%E7%A8%8B%E5%BA%8F/" class="post-title-link" itemprop="url">cmake交叉编译stm32程序</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          cmake交叉编译stm32程序
+        </h1>
 
         <div class="post-meta-container">
           <div class="post-meta">
@@ -207,8 +215,7 @@
     
     
     
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="为什么使用cmake"><a href="#为什么使用cmake" class="headerlink" title="为什么使用cmake?"></a>为什么使用cmake?</h1><p>使用cmake的原因是现在有许多的c&#x2F;c++项目都使用cmake这个工具来构建项目。我相信是一种趋势，以后会有越来越多的项目使用cmake。这是其中一个原因，另一个原因是我想学QT，但是我又不想用QT Creator，所以学习一下cmake方便以后构建QT项目。</p>
+    <div class="post-body" itemprop="articleBody"><h1 id="为什么使用cmake"><a href="#为什么使用cmake" class="headerlink" title="为什么使用cmake?"></a>为什么使用cmake?</h1><p>使用cmake的原因是现在有许多的c&#x2F;c++项目都使用cmake这个工具来构建项目。我相信是一种趋势，以后会有越来越多的项目使用cmake。这是其中一个原因，另一个原因是我想学QT，但是我又不想用QT Creator，所以学习一下cmake方便以后构建QT项目。</p>
 <h1 id="新建项目"><a href="#新建项目" class="headerlink" title="新建项目"></a>新建项目</h1><p>使用stm32cubemx来生成新项目代码。具体步骤不在这赘述，网上有许多资料。我新建了一个名称为led的项目，显然这个项目就是简单点个灯。注意Toolchain选择make。</p>
 <h1 id="创建CMakeLists-txt文件"><a href="#创建CMakeLists-txt文件" class="headerlink" title="创建CMakeLists.txt文件"></a>创建CMakeLists.txt文件</h1><pre><code>cd led
 touch CMakeLists.txt
@@ -239,7 +246,6 @@ ninja
 <h1 id="烧录可执行文件"><a href="#烧录可执行文件" class="headerlink" title="烧录可执行文件"></a>烧录可执行文件</h1><p>使用openocd烧录文件。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">openocd \</span><br><span class="line">-f interface/cmsis-dap.cfg \</span><br><span class="line">-f target/stm32f4x.cfg \</span><br><span class="line">-c init \</span><br><span class="line">-c halt \</span><br><span class="line">-c &quot;program led.elf verify reset exit&quot; \</span><br><span class="line">-c reset \</span><br><span class="line">-c shutdown</span><br></pre></td></tr></table></figure>
 
-      
     </div>
 
     
@@ -247,81 +253,26 @@ ninja
     
 
     <footer class="post-footer">
-        <div class="post-eof"></div>
-      
+          <div class="post-tags">
+              <a href="/tags/stm32/" rel="tag"># stm32</a>
+              <a href="/tags/cmake/" rel="tag"># cmake</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/04/01/about/" rel="prev" title="about">
+                  <i class="fa fa-angle-left"></i> about
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
     </footer>
   </article>
 </div>
 
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://seraphembera.github.io/2024/04/01/about/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="seraphembera">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="seraphembera">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | seraphembera">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/04/01/about/" class="post-title-link" itemprop="url">about</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2024-04-01 13:19:50 / 修改时间：13:21:19" itemprop="dateCreated datePublished" datetime="2024-04-01T13:19:50+08:00">2024-04-01</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>本人信息对抗专业学生，热爱一切有趣的事物。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
 
 
 
