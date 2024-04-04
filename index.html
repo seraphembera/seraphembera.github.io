@@ -192,7 +192,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-04-04 00:01:45" itemprop="dateModified" datetime="2024-04-04T00:01:45+08:00">2024-04-04</time>
+      <time title="修改时间：2024-04-04 21:22:30" itemprop="dateModified" datetime="2024-04-04T21:22:30+08:00">2024-04-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -215,33 +215,14 @@
     
     <div class="post-body" itemprop="articleBody">
           <h1 id="archlinux-nfs配置"><a href="#archlinux-nfs配置" class="headerlink" title="archlinux nfs配置"></a>archlinux nfs配置</h1><p>先安装<code>nfs-utils</code>和<code>rpcbind</code>。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S nfs-utils rpcbindsh</span><br></pre></td></tr></table></figure>
-
-<p>然后配置<code>/etc/exports</code>文件。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nvim /etc/exports</span><br></pre></td></tr></table></figure>
-
-<p>在最后添加以下内容。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/home/seraphembera/work/share/nanopi *(rw,<span class="built_in">sync</span>,no_root_squash)</span><br></pre></td></tr></table></figure>
-
-<p>其中<code>/home/seraphembera/work/share/nanopi</code>是共享的目录，<code>*</code>是通配符，表示允许所有访问。最后开启<code>rpcbind</code>服务和<code>nfs-server</code>服务。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl start rpcbind</span><br><span class="line">sudo systemctl start nfs-server</span><br><span class="line">sudo systemctl <span class="built_in">enable</span> rpcbind</span><br><span class="line">sudo systemctl <span class="built_in">enable</span> nfs-server</span><br></pre></td></tr></table></figure>
-
-<h1 id="客户端配置"><a href="#客户端配置" class="headerlink" title="客户端配置"></a>客户端配置</h1><p>这里客户端是ubuntu系统，先安装<code>nfs-common</code>。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install nfs-common</span><br></pre></td></tr></table></figure>
-
-<p>然后挂载nfs文件系统。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mount -t nfs -o nolock,vers=3 192.168.75.93:/home/seraphembera/work/share/nanopi /mnt</span><br></pre></td></tr></table></figure>
-<h1 id="测试nfs文件系统是否挂载成功"><a href="#测试nfs文件系统是否挂载成功" class="headerlink" title="测试nfs文件系统是否挂载成功"></a>测试nfs文件系统是否挂载成功</h1><p>在archlinux的<code>/home/seraphembera/work/share/nanopi</code>目录新建一个文件1.txt并添加内容。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> 123 &gt; 1.txt</span><br></pre></td></tr></table></figure>
-
-<p>在客户端查看&#x2F;mnt目录。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ls</span> /mnt</span><br></pre></td></tr></table></figure>
-
-<p>发现存在<code>1.txt</code>文件，查看该文件。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> 1.txt</span><br></pre></td></tr></table></figure>
-
-<p>终端输出<code>123</code>说明nfs文件系统挂载成功。</p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/04/03/nfs/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
